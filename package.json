@@ -1,0 +1,49 @@
+{
+  "name": "@gitsync/exec-command",
+  "version": "0.1.0",
+  "description": "Execute command in the relative repositories directories",
+  "keywords": [
+    "gitsync",
+    "exec",
+    "command"
+  ],
+  "author": "twinh <twinhuang@qq.com>",
+  "homepage": "https://github.com/twinh/gitsync#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twinh/gitsync.git"
+  },
+  "scripts": {
+    "build": "yarn clean && tsc",
+    "clean": "rimraf dist coverage",
+    "test": "jest",
+    "prepare": "yarn build"
+  },
+  "dependencies": {
+    "@gitsync/config": "^0.1.5",
+    "execa": "^2.0.4",
+    "chalk-theme": "^0.1.5"
+  },
+  "devDependencies": {
+    "@gitsync/test": "^0.1.4",
+    "@gitsync/log": "^0.1.4",
+    "@types/jest": "^24.0.18",
+    "coveralls": "^3.0.6",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.3"
+  },
+  "ciDependencies": {
+    "@gitsync/config": "gitsync-pkg/gitsync-config",
+    "@gitsync/test": "gitsync-pkg/gitsync-test",
+    "@gitsync/log": "gitsync-pkg/gitsync-log"
+  }
+}
