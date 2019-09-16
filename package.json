@@ -1,7 +1,7 @@
 {
   "name": "@gitsync/exec-command",
   "version": "0.1.0",
-  "description": "Execute command in the relative repositories directories",
+  "description": "Execute command in the relative repositories directory",
   "keywords": [
     "gitsync",
     "exec",

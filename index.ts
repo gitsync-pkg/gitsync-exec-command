@@ -20,7 +20,7 @@ let command: CommandModule = {
 
 command.command = 'exec [cmd] [args..]';
 
-command.describe = 'Sync current repository subdirectories to relative repositories that defined in the config file';
+command.describe = 'Execute command in the relative repositories directory';
 
 command.builder = {
   cmd: {
