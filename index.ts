@@ -10,6 +10,7 @@ interface ExecArguments extends Arguments {
   args: string[]
   include: string[]
   exclude: string[]
+  '--': string[]
 }
 
 let command: CommandModule = {
@@ -17,7 +18,7 @@ let command: CommandModule = {
   }
 };
 
-command.command = 'exec <cmd> [args..]';
+command.command = 'exec [cmd] [args..]';
 
 command.describe = 'Sync current repository subdirectories to relative repositories that defined in the config file';
 
@@ -28,6 +29,7 @@ command.builder = {
   },
   args: {
     describe: 'The arguments pass to the command',
+    default: [],
     type: 'array',
   },
   include: {
@@ -43,8 +45,17 @@ command.builder = {
 };
 
 command.handler = async (argv: ExecArguments) => {
+  argv.args || (argv.args = []);
   argv.include || (argv.include = []);
   argv.exclude || (argv.exclude = []);
+
+  const extraArgs = argv['--'] || [];
+  const cmd = argv.cmd || extraArgs.shift();
+  const args = argv.args.concat(extraArgs);
+  if (!cmd) {
+    log.error('Require command argument to execute');
+    return;
+  }
 
   const config = new Config();
   config.checkFileExist();
@@ -59,7 +70,7 @@ command.handler = async (argv: ExecArguments) => {
 
     log.info(`Executing command in ${theme.info(repoDir)}`);
     try {
-      const result = await execa(argv.cmd, argv.args, {
+      const result = await execa(cmd, args, {
         cwd: repoDir
       });
       log.info(result.all);
