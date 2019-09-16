@@ -75,6 +75,14 @@ describe('exec command', () => {
     // fatal: your current branch 'abc' does not have any commits yet
     expect(process.exitCode).toBe(128);
   });
+
+  test('require cmd argument', async () => {
+    const source = await createRepo();
+    await runCommand(exec, source);
+
+    expect(process.exitCode).toBe(1);
+    expect(logMessage()).toContain('Require command argument to execute');
+  });
 });
 
 

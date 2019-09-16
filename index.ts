@@ -54,6 +54,7 @@ command.handler = async (argv: ExecArguments) => {
   const args = argv.args.concat(extraArgs);
   if (!cmd) {
     log.error('Require command argument to execute');
+    process.exitCode = 1;
     return;
   }
 
