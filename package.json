@@ -29,7 +29,6 @@
   },
   "dependencies": {
     "@gitsync/config": "^0.2.0",
-    "@types/execa": "^2.0.0",
     "chalk-theme": "^0.2.0",
     "execa": "^2.0.4"
   },
