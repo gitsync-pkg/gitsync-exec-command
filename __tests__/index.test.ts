@@ -1,15 +1,17 @@
-import {createRepo, removeRepos, logMessage, runCommand, catchError} from '@gitsync/test';
+import {logMessage, runCommand, catchError, RepoManager} from '@gitsync/test';
 import exec from '..';
 
-afterAll(() => {
-  removeRepos();
-});
-
-afterEach(() => {
-  process.exitCode = 0;
-});
+const {createRepo, removeRepos} = new RepoManager();
 
 describe('exec command', () => {
+  afterAll(async () => {
+    await removeRepos();
+  });
+
+  afterEach(() => {
+    process.exitCode = 0;
+  });
+
   test('run command success', async () => {
     const source = await createRepo();
 
